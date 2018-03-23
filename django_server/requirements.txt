@@ -1,0 +1,8 @@
+gunicorn
+django==2.0.3
+djangorestframework
+markdown
+django-filter
+setuptools
+psycopg2-binary
+dj-database-url
