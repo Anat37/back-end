@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.db import models
-import cloudinary
+from cloudinary import models as clm
 
 
 class ProtoPlace(models.Model):
@@ -13,9 +13,12 @@ class ProtoPlace(models.Model):
     latitude = models.FloatField(default=0.0)
     longitude = models.FloatField(default=0.0)
 
+    def __str__(self):
+        return 'event %d' % self.event_id
+
 
 class ImageAttach(models.Model):
-    image = cloudinary.models.CloudinaryField('image')
+    image = clm.CloudinaryField('image')
     place = models.ForeignKey(ProtoPlace, to_field='event_id', on_delete=models.CASCADE, related_name='images')
 
 

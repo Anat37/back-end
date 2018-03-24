@@ -1,3 +1,8 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
-# Create your models here.
+
+class Image(models.Model):
+    image_id = models.IntegerField()
+    image = CloudinaryField('image')
+    inplace_tags = models.TextField(default='notag')

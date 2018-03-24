@@ -1,3 +1,4 @@
+cloudinary
 gunicorn
 django==2.0.3
 djangorestframework
@@ -6,5 +7,3 @@ django-filter
 setuptools
 psycopg2-binary
 dj-database-url
-pillow
-cloudinary
