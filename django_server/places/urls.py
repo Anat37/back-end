@@ -5,6 +5,7 @@ from places import views
 router = routers.DefaultRouter()
 router.register(r'simple', views.SimpleViewSet)
 router.register(r'info', views.InfoViewSet)
+router.register(r'images', views.ImageViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

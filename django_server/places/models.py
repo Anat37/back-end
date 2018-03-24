@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.db import models
+import cloudinary
 
-# Create your models here.
 
 class ProtoPlace(models.Model):
-    event_id = models.IntegerField()
+    event_id = models.IntegerField(unique=True)
     inplace_tags = models.TextField(default='notag')
     title = models.CharField(default='default_title', max_length=255)
     address = models.CharField(default='def_address', max_length=255)
@@ -12,6 +12,11 @@ class ProtoPlace(models.Model):
     description = models.TextField(default='def_description')
     latitude = models.FloatField(default=0.0)
     longitude = models.FloatField(default=0.0)
+
+
+class ImageAttach(models.Model):
+    image = cloudinary.models.CloudinaryField('image')
+    place = models.ForeignKey(ProtoPlace, to_field='event_id', on_delete=models.CASCADE, related_name='images')
 
 
 class CategoryKudaGo(models.Model):

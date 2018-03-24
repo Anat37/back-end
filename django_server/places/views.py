@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
+from rest_framework.parsers import MultiPartParser, FormParser
 
-from places.models import ProtoPlace
-from places.serializers import SimplePlaceSerializer, InfoPlaceSerializer
+from places.models import ProtoPlace, ImageAttach
+from places.serializers import SimplePlaceSerializer, InfoPlaceSerializer, ImageSerializer
 
 
 class SimpleViewSet(viewsets.ModelViewSet):
@@ -19,3 +20,9 @@ class InfoViewSet(viewsets.ModelViewSet):
     """
     queryset = ProtoPlace.objects.all()
     serializer_class = InfoPlaceSerializer
+
+
+class ImageViewSet(viewsets.ModelViewSet):
+    queryset = ImageAttach.objects.all()
+    serializer_class = ImageSerializer
+    parser_classes = (MultiPartParser, FormParser,)

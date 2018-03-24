@@ -1,12 +1,11 @@
 from rest_framework import serializers
 
-from places.models import ProtoPlace
+from places.models import ProtoPlace, ImageAttach
 import ast
 
-class InfoPlaceSerializer(serializers.ModelSerializer):
-    location = serializers.DictField(default={}, child=serializers.FloatField(), style={
 
-    })
+class InfoPlaceSerializer(serializers.ModelSerializer):
+    location = serializers.DictField(default={}, child=serializers.FloatField())
 
     class Meta:
         model = ProtoPlace
@@ -51,3 +50,9 @@ class SimplePlaceSerializer(serializers.ModelSerializer):
             data['inplace_tags'] = ';'.join(data['inplace_tags'])
         validated_data['inplace_tags'] = data['inplace_tags']
         return validated_data
+
+
+class ImageSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ImageAttach
+        fields = ('image', 'place')

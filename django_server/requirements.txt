@@ -6,3 +6,5 @@ django-filter
 setuptools
 psycopg2-binary
 dj-database-url
+pillow
+cloudinary
