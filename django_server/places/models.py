@@ -61,5 +61,6 @@ class ImageKudaGo(models.Model):
     place = models.ForeignKey(PlaceKudaGo, on_delete=models.CASCADE,related_name='images')
 
 
-admin.register(ProtoPlace)
+admin.site.register(ProtoPlace)
+admin.site.register(ImageAttach)
 

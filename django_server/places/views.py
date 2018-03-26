@@ -17,7 +17,6 @@ class ProtoPlaceViewSet(viewsets.ModelViewSet):
 class ImageViewSet(viewsets.ModelViewSet):
     queryset = ImageAttach.objects.all()
     serializer_class = ImageSerializer
-    parser_classes = (MultiPartParser, FormParser,)
 
 
 class TagsPlaceView(generics.RetrieveAPIView):
