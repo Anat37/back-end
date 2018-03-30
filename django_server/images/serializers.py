@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from images.models import Image
 
 
@@ -12,6 +11,7 @@ class ImageSerializer(serializers.ModelSerializer):
         ret = super().to_representation(instance)
         tags = instance.inplace_tags.split(';')
         ret['inplace_tags'] = tags
+        ret['image'] = instance.image.build_url()
         return ret
 
     def to_internal_value(self, data):

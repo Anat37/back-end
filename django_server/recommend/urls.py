@@ -1,15 +1,13 @@
 from django.conf.urls import url, include
 from django.urls import path
 from rest_framework import routers
+from recommend import views
 
-from images import views
 
 router = routers.DefaultRouter()
-router.register(r'set', views.ImageViewSet)
-
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'', include(router.urls)),
-    path('image/<int:image_id>', views.ImageView.as_view()),
+    path('byimageid/', views.recommend_by_images),
 ]

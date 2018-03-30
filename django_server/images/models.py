@@ -4,7 +4,7 @@ from cloudinary.models import CloudinaryField
 
 
 class Image(models.Model):
-    image_id = models.IntegerField()
+    image_id = models.IntegerField(unique=True)
     image = CloudinaryField('image')
     inplace_tags = models.TextField(default='notag')
 

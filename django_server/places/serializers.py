@@ -9,6 +9,11 @@ class SimpleImageSerializer(serializers.ModelSerializer):
         model = ImageAttach
         fields = ('image',)
 
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        ret['image'] = instance.image.build_url()
+        return ret
+
 
 class InfoPlaceSerializer(serializers.ModelSerializer):
     location = serializers.DictField(default={}, child=serializers.FloatField())
@@ -99,3 +104,9 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ImageAttach
         fields = ('id', 'image', 'place')
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        ret['image'] = instance.image.build_url()
+        return ret
+
