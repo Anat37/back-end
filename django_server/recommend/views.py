@@ -18,13 +18,16 @@ def recommend_by_images(request):
 
     tags = set()
     for id in images_id:
-        image = Image.objects.get(image_id=id)
-        tags.update(set(image.inplace_tags.split(';')))
+        try:
+            image = Image.objects.get(image_id=id)
+            tags.update(set(image.inplace_tags.split(';')))
+        except:
+            pass
     places = ProtoPlace.objects.all()
     rates = []
     for p in places:
         rates.append(len(tags.intersection(set(p.inplace_tags.split(';')))))
     ind = np.argsort(rates)
-    size = min(3, len(ind))
-    places_id = [places[int(ind[-size])].event_id]
+    size = min(5, len(ind))
+    places_id = [places[int(i)].event_id for i in ind[-size:]]
     return Response({'events': places_id})
