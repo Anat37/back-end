@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'', include(router.urls)),
     path('tags/<int:event_id>', views.TagsPlaceView.as_view()),
     path('info/<int:event_id>', views.InfoPlaceView.as_view()),
+    path('info/list/', views.get_places_list),
 ]
