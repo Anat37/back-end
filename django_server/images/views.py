@@ -103,7 +103,7 @@ def get_images_in_one(request):
   {"overlay": re.sub(r'/', ':', str(images[1])), "width": 440, "height": 280, "x": 440, "crop": "fill"},
   {"overlay": re.sub(r'/', ':', str(images[2])), "width": 440, "height": 280, "y": 280, "x": -220, "crop": "fill"},
   {"overlay": re.sub(r'/', ':', str(images[3])), "width": 440, "height": 280, "y": 140, "x": 220, "crop": "fill"}])
-    return Response({"image": url})
+    return Response({"image": url, "images": picked})
 
 
 
