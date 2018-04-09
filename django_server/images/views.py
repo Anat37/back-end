@@ -31,7 +31,7 @@ class ImagePull:
         result = []
         try:
             result = list(self.images_by_tag[all_tags.index(tag)])
-        finally:
+        except:
             pass
         return result
 
@@ -45,7 +45,7 @@ class ImagePull:
             for tag in tags:
                 try:
                     self.images_by_tag[all_tags.index(tag)].add(im.image_id)
-                finally:
+                except:
                     pass
 
 

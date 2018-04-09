@@ -34,12 +34,18 @@ class InfoPlaceView(generics.RetrieveAPIView):
     serializer_class = InfoPlaceSerializer
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @csrf_exempt
 def get_places_list(request):
-    ids = request.query_params['ids'].split(',')
-    ids = [int(id) for id in ids]
+    ids = request.data['events']
     ser = InfoPlaceSerializer()
-    places = [ser.to_representation(ProtoPlace.objects.get(event_id=id)) for id in ids]
-    return Response(places)
+    places = []
+    for id in ids:
+        try:
+            pl = ProtoPlace.objects.get(event_id=int(id))
+            places.append(ser.to_representation(pl))
+        except:
+            pass
+
+    return Response({'places': places})
 
