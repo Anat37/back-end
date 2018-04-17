@@ -4,12 +4,26 @@ from cloudinary import models as clm
 
 
 class ProtoPlace(models.Model):
+    FREE = 'FR'
+    NO_INFO = 'NI'
+    CHEAP = 'CH'
+    EXPENSIVE = 'EX'
+    LMFAO = 'LM'
+    PRICE_CHOICES = [
+        ('FR', 'Free'),
+        ('NI', 'No info'),
+        ('CH', 'less 1500'),
+        ('EX', 'less 5000'),
+        ('LM', 'more 5000')
+    ]
     event_id = models.IntegerField(unique=True)
     inplace_tags = models.TextField(default='notag')
     title = models.CharField(default='default_title', max_length=255)
     address = models.CharField(default='def_address', max_length=255)
     timetable = models.CharField(default='24/7', max_length=255)
     description = models.TextField(default='def_description')
+    available_until = models.DateTimeField(default='2040-01-01')
+    prices = models.CharField(choices=PRICE_CHOICES, default=NO_INFO, max_length=2)
     latitude = models.FloatField(default=0.0)
     longitude = models.FloatField(default=0.0)
 

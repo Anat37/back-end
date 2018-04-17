@@ -85,6 +85,16 @@ def get_images_set_list(group):
     return picked
 
 
+def construct_url(img1, img2, img3, img4):
+    return cloudinary.CloudinaryImage(str(img1)).build_url(transformation=[
+        {"width": 440, "height": 280, "crop": "fill"},
+        {"overlay": re.sub(r'/', ':', str(img2)), "width": 440, "height": 280, "x": 440, "crop": "fill"},
+        {"overlay": re.sub(r'/', ':', str(img3)), "width": 440, "height": 280, "y": 280, "x": -220,
+         "crop": "fill"},
+        {"overlay": re.sub(r'/', ':', str(img4)), "width": 440, "height": 280, "y": 140, "x": 220,
+         "crop": "fill"}])
+
+
 @api_view(['GET'])
 @csrf_exempt
 def get_images_set(request):
@@ -98,11 +108,7 @@ def get_images_in_one(request):
     group = int(request.query_params['group'])
     picked = get_images_set_list(group)
     images = [Image.objects.get(image_id=id).image for id in picked]
-    url = cloudinary.CloudinaryImage(str(images[0])).build_url(transformation=[
-  {"width": 440, "height": 280, "crop": "fill"},
-  {"overlay": re.sub(r'/', ':', str(images[1])), "width": 440, "height": 280, "x": 440, "crop": "fill"},
-  {"overlay": re.sub(r'/', ':', str(images[2])), "width": 440, "height": 280, "y": 280, "x": -220, "crop": "fill"},
-  {"overlay": re.sub(r'/', ':', str(images[3])), "width": 440, "height": 280, "y": 140, "x": 220, "crop": "fill"}])
+    url = construct_url(images[0], images[1], images[2], images[3])
     return Response({"image": url, "images": picked})
 
 
