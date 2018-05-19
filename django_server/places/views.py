@@ -5,8 +5,9 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 
-from places.models import ProtoPlace, ImageAttach
+from places.models import ProtoPlace, ImageAttach, UtilInfo
 from places.serializers import SimplePlaceSerializer, InfoPlaceSerializer, ImageSerializer, ProtoPlaceSerializer
+import requests
 
 
 class ProtoPlaceViewSet(viewsets.ModelViewSet):
@@ -49,3 +50,29 @@ def get_places_list(request):
 
     return Response({'places': places})
 
+
+def get_info_struct():
+    info = UtilInfo.objects.all()
+    if info.count() == 0:
+        info = UtilInfo()
+        info.last_page = 0
+        info.last_event = 0
+        info.save()
+    else:
+        info = info[0]
+    if info.last_event > 20:
+        info.last_event = 0
+        info.last_page += 1
+        info.save()
+
+    return info
+
+
+def get_next_kuda_event():
+    info = get_info_struct()
+    params = {"page": info.last_page, "fields": 'id,title,address,timetable,description,coords',
+              'text_format': 'text', 'location': 'msk', }
+    r = requests.get('https://kudago.com/public-api/v1.2/places/', params=params)
+    result = r.json()
+    info.last_event += 1
+    return result['results'][info.last_event]

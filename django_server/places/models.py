@@ -75,6 +75,10 @@ class ImageKudaGo(models.Model):
     place = models.ForeignKey(PlaceKudaGo, on_delete=models.CASCADE,related_name='images')
 
 
+class UtilInfo(models.Model):
+    last_event = models.IntegerField()
+    last_page = models.IntegerField()
+
 admin.site.register(ProtoPlace)
 admin.site.register(ImageAttach)
 
