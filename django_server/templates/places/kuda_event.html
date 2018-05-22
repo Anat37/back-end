@@ -1,0 +1,22 @@
+<html>
+   <header></header>
+    <body>
+    <div>
+        All tags:
+        {% for tag in all_tags %}
+            {{ tag }};
+        {% endfor %}
+    </div>
+    <p>{{ event.title}}</p>
+    <p>{{ event.address}}</p>
+    <p>{{ event.timetable}}</p>
+    <p>{{ event.description}}</p>
+    <p>{{ event.coords}}</p>
+    <div>
+        <form method="post" action="{% url "places:addkuda" %}">{% csrf_token %}
+            {{ form }}
+            <input type="submit" value="ok">
+        </form>
+    </div>
+    </body>
+</html>

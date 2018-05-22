@@ -14,4 +14,5 @@ urlpatterns = [
     path('tags/<int:event_id>', views.TagsPlaceView.as_view()),
     path('info/<int:event_id>', views.InfoPlaceView.as_view()),
     path('info/list/', views.get_places_list),
+    path('addkuda/', views.get_add_event_kuda, name='addkuda'),
 ]

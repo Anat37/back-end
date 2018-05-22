@@ -59,12 +59,4 @@ def get_next_question(request):
     return Response({'type': 'image', "image": url, "images": picked})
 
 
-@api_view(['GET', 'POST'])
-def get_add_event_kuda(request):
-    if request.method == 'GET':
-        pass
-    else:
-        pass
-    return Response();
-
 

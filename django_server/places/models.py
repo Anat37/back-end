@@ -16,7 +16,7 @@ class ProtoPlace(models.Model):
         ('EX', 'less 5000'),
         ('LM', 'more 5000')
     ]
-    event_id = models.IntegerField(unique=True)
+    event_id = models.IntegerField(unique=True, auto_created=True)
     inplace_tags = models.TextField(default='notag')
     title = models.CharField(default='default_title', max_length=255)
     address = models.CharField(default='def_address', max_length=255)
